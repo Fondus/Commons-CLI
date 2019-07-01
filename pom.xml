@@ -1,0 +1,120 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>tw.fondus.commons</groupId>
+	<artifactId>commons-cli</artifactId>
+	<version>0.2.0</version>
+	<packaging>jar</packaging>
+
+	<name>The commons command-line interface Library</name>
+	<url>https://github.com/Fondus/</url>
+	<inceptionYear>2019</inceptionYear>
+
+	<description>
+		The commons command-line interface is APIs/Utilities provide the standard interface to parse command line parameters,
+		and tools to simple run external process.
+	</description>
+
+	<organization>
+		<name>FondUS Technology Co., Ltd., TW</name>
+		<url>https://github.com/Fondus</url>
+	</organization>
+	<developers>
+		<developer>
+			<name>Brad Chen</name>
+			<organization>FondUS Technology Co., Ltd., TW</organization>
+			<email>vipcube@gmail.com</email>
+		</developer>
+	</developers>
+
+	<properties>
+		<sdk.version>0.1.0</sdk.version>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<lombok.version>1.18.4</lombok.version>
+		<string.version>0.4.0</string.version>
+		<jcommand.verison>1.72</jcommand.verison>
+		<zt.version>1.10</zt.version>
+		<slf4j.version>1.7.25</slf4j.version>
+		<junit.version>4.12</junit.version>
+	</properties>
+
+	<dependencies>
+		<!-- Lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+		</dependency>
+		<!-- Strman -->
+		<dependency>
+			<groupId>com.shekhargulati</groupId>
+			<artifactId>strman</artifactId>
+			<version>${string.version}</version>
+		</dependency>
+		<!-- JCommander -->
+		<dependency>
+			<groupId>com.beust</groupId>
+			<artifactId>jcommander</artifactId>
+			<version>${jcommand.verison}</version>
+		</dependency>
+		<!-- ZT Process Executor -->
+		<dependency>
+			<groupId>org.zeroturnaround</groupId>
+			<artifactId>zt-exec</artifactId>
+			<version>${zt.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- Slf4j -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>${slf4j.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-jdk14</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- JUnit -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.5.1</version>
+				<configuration>
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.target}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	
+	<issueManagement>
+		<system>GitHub Issues</system>
+		<url>https://github.com/Fondus/Commons-CLI/issues</url>
+	</issueManagement>
+</project>
