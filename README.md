@@ -27,4 +27,4 @@ The standard commons interface of FondUS to write command-line program base on J
 - The Commons-CLI Library are licensed under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0)
 
 ## Authors and Contributors
-The Commons-Java libraries are developed by the FondUS Technology Co., Ltd. and are maintained by [@Vipcube](https://github.com/Vipcube).
+The Commons-CLI libraries are developed by the FondUS Technology Co., Ltd. and are maintained by [@Vipcube](https://github.com/Vipcube).
