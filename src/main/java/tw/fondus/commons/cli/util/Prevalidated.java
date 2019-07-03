@@ -18,16 +18,27 @@ public class Prevalidated {
 	private Prevalidated() {}
 	
 	/**
-	 * Check the path exists, if not will throw exception.
+	 * Check the path exists, if not will throw exception with message.
 	 * 
 	 * @param path
-	 * @param errorMessage
+	 * @param message
 	 */
-	public static void checkExists( Path path, String errorMessage ) {
-		Objects.requireNonNull( errorMessage );
+	public static void checkExists( Path path, String message ) {
+		Objects.requireNonNull( message );
 		if ( !Files.exists( path ) ) {
-			log.error( errorMessage );
-			throw new IllegalStateException( errorMessage );
+			log.error( message );
+			throw new IllegalStateException( message );
 		}
+	}
+	
+	/**
+	 * Check the object should non null, , if null will throw exception with message.
+	 * 
+	 * @param instance
+	 * @param message
+	 * @return
+	 */
+	public static <T> T checkNonNull( T instance, String message ) {
+		return Objects.requireNonNull( instance, message );
 	}
 }
