@@ -37,10 +37,9 @@ public class Prevalidated {
 	 * 
 	 * @param index
 	 * @param size
-	 * @param message
 	 * @return
 	 */
-	public static int checkElementIndex( int index, int size, String message ) {
+	public static int checkElementIndex( int index, int size ) {
 	    if (index < 0 || index >= size) {
 	      throw new IndexOutOfBoundsException( Strman.append( "The index: ", String.valueOf( index ), " out of bounds: ", String.valueOf( size ), "." ) );
 	    }
