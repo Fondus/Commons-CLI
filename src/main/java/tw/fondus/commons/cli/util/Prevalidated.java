@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.util.Objects;
 
 import lombok.extern.slf4j.Slf4j;
+import strman.Strman;
 
 /**
  * The Utilities use for command-line interface validated.
@@ -30,6 +31,21 @@ public class Prevalidated {
 			throw new IllegalStateException( message );
 		}
 	}
+	
+	/**
+	 * Check the element index in an array.
+	 * 
+	 * @param index
+	 * @param size
+	 * @param message
+	 * @return
+	 */
+	public static int checkElementIndex( int index, int size, String message ) {
+	    if (index < 0 || index >= size) {
+	      throw new IndexOutOfBoundsException( Strman.append( "The index: ", String.valueOf( index ), " out of bounds: ", String.valueOf( size ), "." ) );
+	    }
+	    return index;
+	  }
 	
 	/**
 	 * Check the object should non null, , if null will throw exception with message.
