@@ -1,7 +1,6 @@
 package tw.fondus.commons.cli;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.ParameterException;
@@ -44,14 +43,17 @@ public abstract class BasicCommandLineExecute {
 			if ( arguments.isHelp() ) {
 				command.usage();
 			} else {
-				this.basePath = Paths.get( arguments.getBasePath() );
-				Prevalidated.checkExists( this.basePath, "CommandLineExecute: Can not find working directory exist." );
+				this.basePath = Prevalidated.checkExists( 
+						arguments.getBasePath(),
+						"CommandLineExecute: Can not find working directory exist." );
 
-				this.inputPath = Paths.get( Strman.append( arguments.getBasePath(), PATH, arguments.getInputPath()  ) );
-				Prevalidated.checkExists( this.inputPath, "CommandLineExecute: The input directory not exist." );
+				this.inputPath = Prevalidated.checkExists( 
+						Strman.append( arguments.getBasePath(), PATH, arguments.getInputPath() )
+						, "CommandLineExecute: The input directory not exist." );
 				
-				this.outputPath = Paths.get( Strman.append( arguments.getBasePath(), PATH, arguments.getOutputPath() ) );
-				Prevalidated.checkExists( this.outputPath, "CommandLineExecute: The output directory not existt." );
+				this.outputPath = Prevalidated.checkExists( 
+						Strman.append( arguments.getBasePath(), PATH, arguments.getOutputPath() ),
+						"CommandLineExecute: The output directory not existt." );
 				
 				// Run the main process
 				this.run( arguments, basePath, inputPath, outputPath );

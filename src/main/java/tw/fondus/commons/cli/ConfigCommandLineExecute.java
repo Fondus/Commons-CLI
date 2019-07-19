@@ -1,7 +1,6 @@
 package tw.fondus.commons.cli;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import strman.Strman;
 import tw.fondus.commons.cli.argument.BasicArguments;
@@ -22,8 +21,9 @@ public abstract class ConfigCommandLineExecute extends BasicCommandLineExecute {
 		ConfigArguments configArguments = (ConfigArguments) arguments;
 		
 		// Check the configuration file path.
-		this.configPath = Paths.get( Strman.append( basePath.toString(), PATH, configArguments.getConfig() ) );
-		Prevalidated.checkExists( this.configPath, "Config CommandLineExecute: The configuration file not exist." );
+		this.configPath = Prevalidated.checkExists( 
+				Strman.append( basePath.toString(), PATH, configArguments.getConfig() ),
+				"Config CommandLineExecute: The configuration file not exist." );
 		
 		this.configRun( configArguments, basePath, inputPath, outputPath, configPath );
 	}
