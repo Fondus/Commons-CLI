@@ -2,6 +2,7 @@ package tw.fondus.commons.cli.util;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Objects;
 
 import lombok.extern.slf4j.Slf4j;
@@ -15,23 +16,38 @@ import strman.Strman;
  */
 @Slf4j
 public class Prevalidated {
-	
-	private Prevalidated() {}
+
+	private Prevalidated() {
+	}
 	
 	/**
 	 * Check the path exists, if not will throw exception with message.
 	 * 
 	 * @param path
 	 * @param message
+	 * @return
 	 */
-	public static void checkExists( Path path, String message ) {
+	public static Path checkExists( String path, String message ) {
+		return checkExists( Paths.get( path ), message );
+	}
+
+	/**
+	 * Check the path exists, if not will throw exception with message.
+	 * 
+	 * @param path
+	 * @param message
+	 * @return
+	 */
+	public static Path checkExists( Path path, String message ) {
 		Objects.requireNonNull( message );
-		if ( !Files.exists( path ) ) {
+		if ( !Files.exists( Objects.requireNonNull( path ) ) ) {
 			log.error( message );
 			throw new IllegalStateException( message );
+		} else {
+			return path;
 		}
 	}
-	
+
 	/**
 	 * Check the element index in an array.
 	 * 
@@ -40,14 +56,16 @@ public class Prevalidated {
 	 * @return
 	 */
 	public static int checkElementIndex( int index, int size ) {
-	    if (index < 0 || index >= size) {
-	      throw new IndexOutOfBoundsException( Strman.append( "The index: ", String.valueOf( index ), " out of bounds: ", String.valueOf( size ), "." ) );
-	    }
-	    return index;
-	  }
-	
+		if ( index < 0 || index >= size ) {
+			throw new IndexOutOfBoundsException( Strman.append( "The index: ", String.valueOf( index ),
+					" out of bounds: ", String.valueOf( size ), "." ) );
+		}
+		return index;
+	}
+
 	/**
-	 * Check the object should non null, , if null will throw exception with message.
+	 * Check the object should non null, , if null will throw exception with
+	 * message.
 	 * 
 	 * @param instance
 	 * @param message

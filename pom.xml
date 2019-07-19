@@ -5,7 +5,7 @@
 
 	<groupId>tw.fondus.commons</groupId>
 	<artifactId>commons-cli</artifactId>
-	<version>0.2.0</version>
+	<version>0.2.1</version>
 	<packaging>jar</packaging>
 
 	<name>The commons command-line interface Library</name>
@@ -30,7 +30,6 @@
 	</developers>
 
 	<properties>
-		<sdk.version>0.1.0</sdk.version>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
