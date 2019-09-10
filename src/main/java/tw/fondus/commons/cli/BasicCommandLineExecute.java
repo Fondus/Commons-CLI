@@ -33,7 +33,6 @@ public abstract class BasicCommandLineExecute {
 	 */
 	public void execute( String[] args, BasicArguments arguments ) {
 		JCommander command = JCommander.newBuilder().addObject( arguments ).build();
-
 		command.setProgramName( this.getClass().getSimpleName() );
 
 		try {
@@ -64,7 +63,6 @@ public abstract class BasicCommandLineExecute {
 			command.usage();
 		} catch (Exception e) {
 			log.error( "CommandLineExecute: The main process has something wrong.", e );
-			e.printStackTrace();
 		}
 	}
 
