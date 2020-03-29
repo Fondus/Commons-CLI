@@ -1,13 +1,13 @@
 package tw.fondus.commons.cli;
 
-import java.nio.file.Path;
-
+import lombok.Getter;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import lombok.Getter;
 import tw.fondus.commons.cli.argument.BasicArguments;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * The unit test of BasicCommandLineExecute.
@@ -29,7 +29,7 @@ public class BasicCommandLineExecuteTest {
 	
 	@Test
 	public void test() {
-		BasicArguments arguments = new BasicArguments();
+		BasicArguments arguments = BasicArguments.builder().build();
 		new TestCLI().execute( this.getArgs(), arguments );
 	}
 	
@@ -39,11 +39,15 @@ public class BasicCommandLineExecuteTest {
 	 * @author Brad Chen
 	 *
 	 */
-	private class TestCLI extends BasicCommandLineExecute {
+	private static class TestCLI extends BasicCommandLineExecute {
 		@Override
-		protected void run( BasicArguments arguments, Path basePath, Path inputPath, Path outputPath )
-				throws Exception {
-			Assert.assertTrue( arguments.getBasePath().equals( "src/test/resources" ) );
+		protected void run( BasicArguments arguments, Path basePath, Path inputPath, Path outputPath ) {
+			Assert.assertFalse( arguments.isHelp() );
+			Assert.assertEquals( Paths.get( "src/test/resources" ), arguments.getBasePath() );
+			Assert.assertEquals( "Input/", arguments.getInputPath() );
+			Assert.assertEquals( "Output/", arguments.getOutputPath() );
+			Assert.assertEquals( Paths.get( "src/test/resources/Input" ), inputPath );
+			Assert.assertEquals( Paths.get( "src/test/resources/Output" ), outputPath );
 		}
 	}
 }

@@ -1,14 +1,12 @@
 package tw.fondus.commons.cli;
 
-import java.nio.file.Path;
-
+import lombok.Getter;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import lombok.Getter;
-import strman.Strman;
 import tw.fondus.commons.cli.argument.ConfigArguments;
+
+import java.nio.file.Path;
 
 /**
  * The unit test of ConfigCommandLineExecute.
@@ -32,7 +30,7 @@ public class ConfigCommandLineExecuteTest {
 	
 	@Test
 	public void test() {
-		ConfigArguments arguments = new ConfigArguments();
+		ConfigArguments arguments = ConfigArguments.builder().build();
 		new TestCLI().execute( this.getArgs(), arguments );
 	}
 	
@@ -42,12 +40,12 @@ public class ConfigCommandLineExecuteTest {
 	 * @author Brad Chen
 	 *
 	 */
-	private class TestCLI extends ConfigCommandLineExecute {
+	private static class TestCLI extends ConfigCommandLineExecute {
 		@Override
 		protected void configRun( ConfigArguments arguments, Path basePath, Path inputPath, Path outputPath,
 				Path configPath ) {
-			Assert.assertTrue( arguments.getConfig().equals( "test.properties" ) );
-			Assert.assertTrue( Strman.append( basePath.toString(), PATH, arguments.getConfig() ).equals( configPath.toString() ) );
+			Assert.assertEquals( "test.properties", arguments.getConfig() );
+			Assert.assertEquals( configPath, basePath.resolve( arguments.getConfig() ) );
 		}
 	}
 }

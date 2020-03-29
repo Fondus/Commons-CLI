@@ -1,13 +1,13 @@
 package tw.fondus.commons.cli.exec;
 
+import org.zeroturnaround.exec.InvalidExitValueException;
+import org.zeroturnaround.exec.ProcessExecutor;
+import org.zeroturnaround.exec.ProcessResult;
+
 import java.io.IOException;
 import java.util.Objects;
 import java.util.concurrent.TimeoutException;
 import java.util.function.Function;
-
-import org.zeroturnaround.exec.InvalidExitValueException;
-import org.zeroturnaround.exec.ProcessExecutor;
-import org.zeroturnaround.exec.ProcessResult;
 
 /**
  * The Utilities to simple use {@link org.zeroturnaround.exec.ProcessExecutor}.
@@ -26,8 +26,8 @@ public class Executions {
 	/**
 	 * Build the executor with commands.
 	 * 
-	 * @param commands
-	 * @return
+	 * @param commands commands
+	 * @return executor
 	 */
 	public static ProcessExecutor buildExecutor( String... commands ) {
 		return new ProcessExecutor()
@@ -38,13 +38,13 @@ public class Executions {
 	 * Execution with commands after custom executor setting. <br/>
 	 * Example: executor -> { executor to setting };
 	 * 
-	 * @param executorSetting
-	 * @param commands
-	 * @throws InvalidExitValueException
-	 * @throws IOException
-	 * @throws InterruptedException
-	 * @throws TimeoutException
-	 * @return
+	 * @param executorSetting executor setting process
+	 * @param commands commands
+	 * @throws InvalidExitValueException invalid exitValue exception
+	 * @throws IOException io exception
+	 * @throws InterruptedException interrupted exception
+	 * @throws TimeoutException time out exception
+	 * @return process result
 	 */
 	public static ProcessResult execute( Function<ProcessExecutor, ProcessExecutor> executorSetting, String... commands ) throws InvalidExitValueException, IOException, InterruptedException, TimeoutException {
 		Objects.requireNonNull( executorSetting, "Executions: executorSetting" );
