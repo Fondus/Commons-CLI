@@ -4,6 +4,8 @@ import com.beust.jcommander.Parameter;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 
 /**
  * Standard arguments of Command-Line Interface base on BasicArguments.<br/>
@@ -14,7 +16,9 @@ import lombok.EqualsAndHashCode;
  * @see BasicArguments
  */
 @Data
-@EqualsAndHashCode( callSuper=false )
+@SuperBuilder
+@ToString( callSuper = true )
+@EqualsAndHashCode( callSuper = true )
 public class ConfigArguments extends BasicArguments {
 	@Parameter( names = { "--config", "-c" }, required = true,
 			description = "The file name of configuration, relative to the current working directory.")

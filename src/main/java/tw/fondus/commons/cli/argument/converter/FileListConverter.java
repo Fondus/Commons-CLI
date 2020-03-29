@@ -1,10 +1,10 @@
 package tw.fondus.commons.cli.argument.converter;
 
+import com.beust.jcommander.IStringConverter;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import com.beust.jcommander.IStringConverter;
 
 /**
  * Convert arguments string file list with comma symbol.
@@ -12,6 +12,7 @@ import com.beust.jcommander.IStringConverter;
  * @author Brad Chen
  *
  */
+@Deprecated
 public class FileListConverter implements IStringConverter<List<String>> {
 	@Override
 	public List<String> convert( String files ) {

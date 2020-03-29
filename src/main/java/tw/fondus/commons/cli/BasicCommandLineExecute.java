@@ -1,14 +1,11 @@
 package tw.fondus.commons.cli;
 
-import java.nio.file.Path;
-
-import com.beust.jcommander.JCommander;
-import com.beust.jcommander.ParameterException;
-
 import lombok.extern.slf4j.Slf4j;
-import strman.Strman;
 import tw.fondus.commons.cli.argument.BasicArguments;
+import tw.fondus.commons.cli.util.JCommanderRunner;
 import tw.fondus.commons.cli.util.Prevalidated;
+
+import java.nio.file.Path;
 
 /**
  * A Parent class interface use to execute program with basic command-line interface.
@@ -18,67 +15,36 @@ import tw.fondus.commons.cli.util.Prevalidated;
  */
 @Slf4j
 public abstract class BasicCommandLineExecute {
+	@Deprecated
 	protected static final String PATH = System.getProperty( "file.separator" );
-	private Path basePath;
-	private Path inputPath;
-	private Path outputPath;
 
 	/**
 	 * Use BasicArguments to execute program with command-line interface.<br/>
 	 * Will check basic arguments.
 	 * 
-	 * @param args
-	 * @param arguments
-	 * @throws Exception
+	 * @param args the command line arguments.
+	 * @param arguments the program arguments.
 	 */
 	public void execute( String[] args, BasicArguments arguments ) {
-		JCommander command = JCommander.newBuilder().addObject( arguments ).build();
-		command.setProgramName( this.getClass().getSimpleName() );
+		JCommanderRunner.execute( args, arguments, this.getClass().getSimpleName(), basicArguments -> {
+			Path inputPath = Prevalidated.checkExists( basicArguments.getBasePath().resolve( basicArguments.getInputPath() ),
+					"CommandLineExecute: The input directory not exist." );
 
-		try {
-			// Parse the string arguments
-			command.parse( args );
+			Path outputPath = Prevalidated.checkExists( basicArguments.getBasePath().resolve( basicArguments.getOutputPath() ),
+					"CommandLineExecute: The output directory not exist." );
 
-			if ( arguments.isHelp() ) {
-				command.usage();
-			} else {
-				this.basePath = Prevalidated.checkExists( 
-						arguments.getBasePath(),
-						"CommandLineExecute: Can not find working directory exist." );
-
-				this.inputPath = Prevalidated.checkExists( 
-						Strman.append( arguments.getBasePath(), PATH, arguments.getInputPath() )
-						, "CommandLineExecute: The input directory not exist." );
-				
-				this.outputPath = Prevalidated.checkExists( 
-						Strman.append( arguments.getBasePath(), PATH, arguments.getOutputPath() ),
-						"CommandLineExecute: The output directory not existt." );
-				
-				// Run the main process
-				this.run( arguments, basePath, inputPath, outputPath );
-			}
-
-		} catch (ParameterException e) {
-			log.error( "CommandLineExecute: The arguments parse exception.", e );
-			command.usage();
-		} catch (Exception e) {
-			log.error( "CommandLineExecute: The main process has something wrong.", e );
-		}
+			// Run the main process
+			this.run( basicArguments, basicArguments.getBasePath(), inputPath, outputPath );
+		} );
 	}
 
 	/**
 	 * Execute process with arguments and working directory.
 	 * 
-	 * @param arguments
-	 *            :The program arguments.
-	 * @param basePath
-	 *            :The current working directory.
-	 * @param inputPath
-	 *            :The input directory path, relative to the current working directory.
-	 * @param outputPath
-	 *            :The output directory path, relative to the current working directory.
-	 * @throws Exception
+	 * @param arguments the program arguments.
+	 * @param basePath the current working directory.
+	 * @param inputPath the input directory path, relative to the current working directory.
+	 * @param outputPath the output directory path, relative to the current working directory.
 	 */
-	protected abstract void run( BasicArguments arguments, Path basePath, Path inputPath, Path outputPath )
-			throws Exception;
+	protected abstract void run( BasicArguments arguments, Path basePath, Path inputPath, Path outputPath );
 }

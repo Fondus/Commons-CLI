@@ -1,11 +1,10 @@
 package tw.fondus.commons.cli;
 
-import java.nio.file.Path;
-
-import strman.Strman;
 import tw.fondus.commons.cli.argument.BasicArguments;
 import tw.fondus.commons.cli.argument.ConfigArguments;
 import tw.fondus.commons.cli.util.Prevalidated;
+
+import java.nio.file.Path;
 
 /**
  * A Parent class interface use to execute program with configuration command-line interface.
@@ -14,15 +13,13 @@ import tw.fondus.commons.cli.util.Prevalidated;
  * @see BasicCommandLineExecute
  */
 public abstract class ConfigCommandLineExecute extends BasicCommandLineExecute {
-	private Path configPath;
-	
+
 	@Override
-	protected void run( BasicArguments arguments, Path basePath, Path inputPath, Path outputPath ) throws Exception {
+	protected void run( BasicArguments arguments, Path basePath, Path inputPath, Path outputPath ) {
 		ConfigArguments configArguments = (ConfigArguments) arguments;
 		
 		// Check the configuration file path.
-		this.configPath = Prevalidated.checkExists( 
-				Strman.append( basePath.toString(), PATH, configArguments.getConfig() ),
+		Path configPath = Prevalidated.checkExists( basePath.resolve( configArguments.getConfig() ),
 				"Config CommandLineExecute: The configuration file not exist." );
 		
 		this.configRun( configArguments, basePath, inputPath, outputPath, configPath );
@@ -31,11 +28,11 @@ public abstract class ConfigCommandLineExecute extends BasicCommandLineExecute {
 	/**
 	 * Execute process with arguments and configuration file.
 	 * 
-	 * @param arguments
-	 * @param basePath
-	 * @param inputPath
-	 * @param outputPath
-	 * @param configPath
+	 * @param arguments the program arguments
+	 * @param basePath the current working directory
+	 * @param inputPath the input directory path, relative to the current working directory
+	 * @param outputPath the output directory path, relative to the current working directory
+	 * @param configPath the config directory path, relative to the current working directory
 	 */
 	protected abstract void configRun( ConfigArguments arguments, Path basePath, Path inputPath, Path outputPath, Path configPath );
 }
