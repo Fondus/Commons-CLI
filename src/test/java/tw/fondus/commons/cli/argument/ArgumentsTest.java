@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.nio.file.Paths;
-import java.util.Collections;
+import java.util.Arrays;
 
 /**
  * The unit test of arguments.
@@ -36,16 +36,18 @@ public class ArgumentsTest {
 		BasicIOFilesArguments arguments = BasicIOFilesArguments.builder()
 				.help( true )
 				.basePath( Paths.get( "src/test/resources" ) )
-				.inputs( Collections.singletonList( "Input.txt" ) )
-				.outputs( Collections.singletonList( "Output.txt" ) )
+				.inputs( Arrays.asList( "Input1.txt", "Input2.txt" ) )
+				.outputs( Arrays.asList( "Output1.txt", "Output2.txt" ) )
 				.build();
 
 		Assert.assertTrue( arguments.isHelp() );
 		Assert.assertEquals( Paths.get( "src/test/resources" ) , arguments.getBasePath() );
 		Assert.assertEquals( "Input/", arguments.getInputPath() );
 		Assert.assertEquals( "Output/", arguments.getOutputPath() );
-		Assert.assertEquals( "Input.txt", arguments.getInputs().get( 0 ) );
-		Assert.assertEquals( "Output.txt", arguments.getOutputs().get( 0 ) );
+		Assert.assertEquals( "Input1.txt", arguments.getInputs().get( 0 ) );
+		Assert.assertEquals( "Input2.txt", arguments.getInputs().get( 1 ) );
+		Assert.assertEquals( "Output1.txt", arguments.getOutputs().get( 0 ) );
+		Assert.assertEquals( "Output2.txt", arguments.getOutputs().get( 1 ) );
 	}
 
 	@Test
