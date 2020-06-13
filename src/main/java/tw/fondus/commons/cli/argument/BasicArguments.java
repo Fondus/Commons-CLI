@@ -32,4 +32,14 @@ public class BasicArguments extends BasicHelpArguments {
 	@Builder.Default
 	@Parameter( names = { "--odir", "-od" }, description = "The output file folder, relative to the current working directory." )
 	private String outputPath = "Output/";
+
+	/**
+	 * Create the argument instance.
+	 *
+	 * @return argument instance
+	 * @since 0.4.2
+	 */
+	public static BasicArguments instance(){
+		return BasicArguments.builder().build();
+	}
 }

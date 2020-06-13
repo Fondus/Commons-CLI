@@ -30,7 +30,7 @@ public class ConfigCommandLineExecuteTest {
 	
 	@Test
 	public void test() {
-		ConfigArguments arguments = ConfigArguments.builder().build();
+		ConfigArguments arguments = ConfigArguments.instance();
 		new TestCLI().execute( this.getArgs(), arguments );
 	}
 	

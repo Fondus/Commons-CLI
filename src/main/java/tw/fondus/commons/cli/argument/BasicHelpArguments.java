@@ -18,4 +18,14 @@ public class BasicHelpArguments implements IHelpArgument {
 	@Builder.Default
 	@Parameter( names = { "--help", "-h" }, description = "Show how to usage.", help = true )
 	private boolean help = false;
+
+	/**
+	 * Create the argument instance.
+	 *
+	 * @return argument instance
+	 * @since 0.4.2
+	 */
+	public static BasicHelpArguments instance(){
+		return BasicHelpArguments.builder().build();
+	}
 }

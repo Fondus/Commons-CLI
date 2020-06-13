@@ -23,4 +23,14 @@ import java.nio.file.Path;
 public class BasicNoIOArguments extends BasicHelpArguments {
 	@Parameter( names = { "--base", "-b" }, required = true, description = "The current working directory.", converter = ToPathConverter.class )
 	private Path basePath;
+
+	/**
+	 * Create the argument instance.
+	 *
+	 * @return argument instance
+	 * @since 0.4.2
+	 */
+	public static BasicNoIOArguments instance(){
+		return BasicNoIOArguments.builder().build();
+	}
 }

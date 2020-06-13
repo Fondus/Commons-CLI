@@ -15,7 +15,7 @@ import java.util.Arrays;
 public class ArgumentsTest {
 	@Test
 	public void testBasicHelp(){
-		BasicHelpArguments arguments = BasicHelpArguments.builder().build();
+		BasicHelpArguments arguments = BasicHelpArguments.instance();
 		Assert.assertFalse( arguments.isHelp() );
 	}
 
