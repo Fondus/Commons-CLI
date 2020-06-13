@@ -28,4 +28,14 @@ public class BasicIOFilesArguments extends BasicArguments {
 	@Parameter( names = { "--output", "-o" }, required = true, description = "The output file list with comma, and order is fixed.",
 			splitter = CommaSplitter.class )
 	private List<String> outputs;
+
+	/**
+	 * Create the argument instance.
+	 *
+	 * @return argument instance
+	 * @since 0.4.2
+	 */
+	public static BasicIOFilesArguments instance(){
+		return BasicIOFilesArguments.builder().build();
+	}
 }

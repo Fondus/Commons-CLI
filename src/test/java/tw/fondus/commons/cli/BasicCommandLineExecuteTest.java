@@ -29,7 +29,7 @@ public class BasicCommandLineExecuteTest {
 	
 	@Test
 	public void test() {
-		BasicArguments arguments = BasicArguments.builder().build();
+		BasicArguments arguments = BasicArguments.instance();
 		new TestCLI().execute( this.getArgs(), arguments );
 	}
 	
