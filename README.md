@@ -8,8 +8,8 @@ The standard commons interface of FondUS to write command-line program base on J
 If your argument implements `IHelpArgument`, you can use the JCommanderRunner to help parse arguments.
 No need cast your arguments to actual type.
 
-```java
-JCommanderRunner.execute( this.getArgs(), BasicHelpArguments.builder().build(), "UnitTest", arguments -> {
+```java=
+JCommanderRunner.execute( this.getArgs(), BasicHelpArguments.instance(), "UnitTest", arguments -> {
     Assert.assertFalse( arguments.isHelp() );
     Assert.assertEquals( Paths.get( "src/test/resources" ) , arguments.getBasePath() );
 } );
@@ -36,7 +36,7 @@ JCommanderRunner.execute( this.getArgs(), BasicHelpArguments.builder().build(), 
 | -id / --idir | The input file folder, relative to the current working directory. | Input/ | false |
 | -od / --odir | The output file folder, relative to the current working directory. | Output/ | false |
 
-- `ConfigArguments`: If you **need read congih/properties**, use this please.
+- `ConfigArguments`: If you **need read config/properties**, use this please.
 
 | Argument | Description | Default | Required |
 |:------ |:----------- |:-----------:|:-----------:|
