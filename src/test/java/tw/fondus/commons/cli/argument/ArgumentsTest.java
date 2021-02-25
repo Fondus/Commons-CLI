@@ -1,7 +1,7 @@
 package tw.fondus.commons.cli.argument;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -16,7 +16,7 @@ public class ArgumentsTest {
 	@Test
 	public void testBasicHelp(){
 		BasicHelpArguments arguments = BasicHelpArguments.instance();
-		Assert.assertFalse( arguments.isHelp() );
+		Assertions.assertFalse( arguments.isHelp() );
 	}
 
 	@Test
@@ -25,10 +25,10 @@ public class ArgumentsTest {
 				.help( true )
 				.basePath( Paths.get( "src/test/resources" ) )
 				.build();
-		Assert.assertTrue( arguments.isHelp() );
-		Assert.assertEquals( Paths.get( "src/test/resources" ) , arguments.getBasePath() );
-		Assert.assertEquals( "Input/", arguments.getInputPath() );
-		Assert.assertEquals( "Output/", arguments.getOutputPath() );
+		Assertions.assertTrue( arguments.isHelp() );
+		Assertions.assertEquals( Paths.get( "src/test/resources" ) , arguments.getBasePath() );
+		Assertions.assertEquals( "Input/", arguments.getInputPath() );
+		Assertions.assertEquals( "Output/", arguments.getOutputPath() );
 	}
 
 	@Test
@@ -40,14 +40,14 @@ public class ArgumentsTest {
 				.outputs( Arrays.asList( "Output1.txt", "Output2.txt" ) )
 				.build();
 
-		Assert.assertTrue( arguments.isHelp() );
-		Assert.assertEquals( Paths.get( "src/test/resources" ) , arguments.getBasePath() );
-		Assert.assertEquals( "Input/", arguments.getInputPath() );
-		Assert.assertEquals( "Output/", arguments.getOutputPath() );
-		Assert.assertEquals( "Input1.txt", arguments.getInputs().get( 0 ) );
-		Assert.assertEquals( "Input2.txt", arguments.getInputs().get( 1 ) );
-		Assert.assertEquals( "Output1.txt", arguments.getOutputs().get( 0 ) );
-		Assert.assertEquals( "Output2.txt", arguments.getOutputs().get( 1 ) );
+		Assertions.assertTrue( arguments.isHelp() );
+		Assertions.assertEquals( Paths.get( "src/test/resources" ) , arguments.getBasePath() );
+		Assertions.assertEquals( "Input/", arguments.getInputPath() );
+		Assertions.assertEquals( "Output/", arguments.getOutputPath() );
+		Assertions.assertEquals( "Input1.txt", arguments.getInputs().get( 0 ) );
+		Assertions.assertEquals( "Input2.txt", arguments.getInputs().get( 1 ) );
+		Assertions.assertEquals( "Output1.txt", arguments.getOutputs().get( 0 ) );
+		Assertions.assertEquals( "Output2.txt", arguments.getOutputs().get( 1 ) );
 	}
 
 	@Test
@@ -57,10 +57,10 @@ public class ArgumentsTest {
 				.config( "Config/" )
 				.build();
 
-		Assert.assertFalse( arguments.isHelp() );
-		Assert.assertEquals( Paths.get( "src/test/resources" ) , arguments.getBasePath() );
-		Assert.assertEquals( "Input/", arguments.getInputPath() );
-		Assert.assertEquals( "Output/", arguments.getOutputPath() );
-		Assert.assertEquals( "Config/", arguments.getConfig() );
+		Assertions.assertFalse( arguments.isHelp() );
+		Assertions.assertEquals( Paths.get( "src/test/resources" ) , arguments.getBasePath() );
+		Assertions.assertEquals( "Input/", arguments.getInputPath() );
+		Assertions.assertEquals( "Output/", arguments.getOutputPath() );
+		Assertions.assertEquals( "Config/", arguments.getConfig() );
 	}
 }

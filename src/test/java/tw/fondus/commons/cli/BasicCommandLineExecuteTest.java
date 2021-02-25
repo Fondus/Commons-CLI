@@ -1,9 +1,8 @@
 package tw.fondus.commons.cli;
 
-import lombok.Getter;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import tw.fondus.commons.cli.argument.BasicArguments;
 
 import java.nio.file.Path;
@@ -16,12 +15,11 @@ import java.nio.file.Paths;
  *
  */
 public class BasicCommandLineExecuteTest {
-	@Getter
-	private String[] args;
+	private static String[] args;
 	
-	@Before
-	public void setUp() {
-		this.args = new String[]{
+	@BeforeAll
+	public static void setUp() {
+		args = new String[]{
 				"-b",
 				"src/test/resources"
 				};
@@ -30,7 +28,7 @@ public class BasicCommandLineExecuteTest {
 	@Test
 	public void test() {
 		BasicArguments arguments = BasicArguments.instance();
-		new TestCLI().execute( this.getArgs(), arguments );
+		new TestCLI().execute( args, arguments );
 	}
 	
 	/**
@@ -42,12 +40,12 @@ public class BasicCommandLineExecuteTest {
 	private static class TestCLI extends BasicCommandLineExecute {
 		@Override
 		protected void run( BasicArguments arguments, Path basePath, Path inputPath, Path outputPath ) {
-			Assert.assertFalse( arguments.isHelp() );
-			Assert.assertEquals( Paths.get( "src/test/resources" ), arguments.getBasePath() );
-			Assert.assertEquals( "Input/", arguments.getInputPath() );
-			Assert.assertEquals( "Output/", arguments.getOutputPath() );
-			Assert.assertEquals( Paths.get( "src/test/resources/Input" ), inputPath );
-			Assert.assertEquals( Paths.get( "src/test/resources/Output" ), outputPath );
+			Assertions.assertFalse( arguments.isHelp() );
+			Assertions.assertEquals( Paths.get( "src/test/resources" ), arguments.getBasePath() );
+			Assertions.assertEquals( "Input/", arguments.getInputPath() );
+			Assertions.assertEquals( "Output/", arguments.getOutputPath() );
+			Assertions.assertEquals( Paths.get( "src/test/resources/Input" ), inputPath );
+			Assertions.assertEquals( Paths.get( "src/test/resources/Output" ), outputPath );
 		}
 	}
 }

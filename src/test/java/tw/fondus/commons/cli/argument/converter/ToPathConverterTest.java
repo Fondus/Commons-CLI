@@ -1,7 +1,7 @@
 package tw.fondus.commons.cli.argument.converter;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.nio.file.Path;
 
@@ -15,6 +15,6 @@ public class ToPathConverterTest {
 	@Test
 	public void test(){
 		Path path = new ToPathConverter().convert( "src/test/resources" );
-		Assert.assertEquals( "src" + System.getProperty( "file.separator" ) + "test" + System.getProperty( "file.separator" ) + "resources", path.toString() );
+		Assertions.assertEquals( "src" + System.getProperty( "file.separator" ) + "test" + System.getProperty( "file.separator" ) + "resources", path.toString() );
 	}
 }
