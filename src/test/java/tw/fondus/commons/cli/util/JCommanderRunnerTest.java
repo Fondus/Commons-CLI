@@ -1,9 +1,8 @@
 package tw.fondus.commons.cli.util;
 
-import lombok.Getter;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import tw.fondus.commons.cli.argument.BasicArguments;
 
 import java.nio.file.Paths;
@@ -15,12 +14,11 @@ import java.nio.file.Paths;
  *
  */
 public class JCommanderRunnerTest {
-	@Getter
-	private String[] args;
+	private static String[] args;
 
-	@Before
-	public void setUp() {
-		this.args = new String[]{
+	@BeforeAll
+	public static void setUp() {
+		args = new String[]{
 				"-b",
 				"src/test/resources"
 		};
@@ -28,9 +26,9 @@ public class JCommanderRunnerTest {
 
 	@Test
 	public void test(){
-		JCommanderRunner.execute( this.getArgs(), BasicArguments.builder().build(), "UnitTest", arguments -> {
-			Assert.assertFalse( arguments.isHelp() );
-			Assert.assertEquals( Paths.get( "src/test/resources" ) , arguments.getBasePath() );
+		JCommanderRunner.execute( args, BasicArguments.builder().build(), "UnitTest", arguments -> {
+			Assertions.assertFalse( arguments.isHelp() );
+			Assertions.assertEquals( Paths.get( "src/test/resources" ) , arguments.getBasePath() );
 		} );
 	}
 }

@@ -31,6 +31,7 @@ public class JCommanderRunner {
 		JCommander command = JCommander.newBuilder()
 				.programName( Objects.requireNonNull( programName, "JCommanderRunner: The program name can't not be null." ) )
 				.addObject( Objects.requireNonNull( arguments, "JCommanderRunner: The arguments can't not be null." ) )
+				.acceptUnknownOptions( true )
 				.build();
 		try {
 			// Parse the string arguments

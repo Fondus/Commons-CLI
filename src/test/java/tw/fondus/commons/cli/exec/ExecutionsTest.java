@@ -1,7 +1,7 @@
 package tw.fondus.commons.cli.exec;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.zeroturnaround.exec.InvalidExitValueException;
 
 import java.io.IOException;
@@ -27,6 +27,6 @@ public class ExecutionsTest {
 		String output = Executions.execute( executor -> executor.readOutput( true ),
 				"java", "-version" ).outputUTF8();
 		
-		Assert.assertTrue( Objects.nonNull( output ) );
+		Assertions.assertTrue( Objects.nonNull( output ) );
 	}
 }

@@ -1,9 +1,8 @@
 package tw.fondus.commons.cli;
 
-import lombok.Getter;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import tw.fondus.commons.cli.argument.ConfigArguments;
 
 import java.nio.file.Path;
@@ -15,12 +14,11 @@ import java.nio.file.Path;
  *
  */
 public class ConfigCommandLineExecuteTest {
-	@Getter
-	private String[] args;
+	private static String[] args;
 	
-	@Before
-	public void setUp() {
-		this.args = new String[]{
+	@BeforeAll
+	public static void setUp() {
+		args = new String[]{
 				"-b",
 				"src/test/resources",
 				"-c",
@@ -31,7 +29,7 @@ public class ConfigCommandLineExecuteTest {
 	@Test
 	public void test() {
 		ConfigArguments arguments = ConfigArguments.instance();
-		new TestCLI().execute( this.getArgs(), arguments );
+		new TestCLI().execute( args, arguments );
 	}
 	
 	/**
@@ -44,8 +42,8 @@ public class ConfigCommandLineExecuteTest {
 		@Override
 		protected void configRun( ConfigArguments arguments, Path basePath, Path inputPath, Path outputPath,
 				Path configPath ) {
-			Assert.assertEquals( "test.properties", arguments.getConfig() );
-			Assert.assertEquals( configPath, basePath.resolve( arguments.getConfig() ) );
+			Assertions.assertEquals( "test.properties", arguments.getConfig() );
+			Assertions.assertEquals( configPath, basePath.resolve( arguments.getConfig() ) );
 		}
 	}
 }
