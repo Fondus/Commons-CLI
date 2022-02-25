@@ -3,7 +3,7 @@
 
 	<groupId>tw.fondus.commons</groupId>
 	<artifactId>commons-cli</artifactId>
-	<version>0.4.2</version>
+	<version>0.4.3</version>
 	<packaging>jar</packaging>
 
 	<name>The commons command-line interface Library</name>
@@ -30,7 +30,7 @@
 		<developerConnection>scm:git:https://github.com/Fondus/Commons-CLI.git</developerConnection>
 		<tag>HEAD</tag>
 	</scm>
-	
+
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
@@ -93,7 +93,7 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	
+
 	<build>
 		<plugins>
 			<plugin>
@@ -149,7 +149,7 @@
 			</plugin>
 		</plugins>
 	</build>
-	
+
 	<issueManagement>
 		<system>GitHub Issues</system>
 		<url>https://github.com/Fondus/Commons-CLI/issues</url>
